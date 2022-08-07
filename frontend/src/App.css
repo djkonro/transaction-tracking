@@ -1,0 +1,27 @@
+.App {
+  text-align: center;
+  margin: 3em;
+}
+
+#search-box {
+  margin: 2em;
+}
+
+.table {
+  width: 85%;
+}
+
+#modal {
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 0em;
+  right: 0em;
+}
+
+tbody > tr:hover > td {
+  background-color: #d3d1d1;
+  cursor: pointer;
+}

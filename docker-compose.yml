@@ -1,0 +1,40 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - 27017:27017
+
+  webapi:
+    build: ./backend
+    container_name: webapi
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017/
+    depends_on:
+      - mongodb
+    volumes:
+      - ./backend:/go/backend
+    command: ["go", "run", "."]
+  
+  scheduler:
+    build: ./scheduler
+    container_name: scheduler
+    depends_on:
+      - mongodb
+      - webapi
+    volumes:
+      - ./scheduler:/go/scheduler
+    command: ["go", "run", "."]
+
+  webapp:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - webapi
+    volumes:
+      - ./frontend:/frontend
+    command: ["yarn", "start"]

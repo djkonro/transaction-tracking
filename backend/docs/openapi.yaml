@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Transaction API
+  description: >-
+    Interact with the transaction app api.
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000/api
+tags:
+  - name: transaction
+paths:
+  /transaction:
+    post:
+      tags:
+        - transaction
+      summary: Add a new transaction.
+      requestBody:
+        description: >-
+          Transaction object to be added.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transaction'
+      responses:
+        '200':
+          description: Transaction successfully added!
+  /transactions:
+    get:
+      tags:
+        - transaction
+      summary: Get all transactions.
+      description: Returns a list of transactions
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+  /transaction/{transactionId}:
+    get:
+      tags:
+        - transaction
+      summary: Find transaction by ID
+      description: Returns a single transaction
+      parameters:
+        - name: transactionId
+          in: path
+          description: ID of transaction to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+    put:
+      tags:
+        - transaction
+      summary: Update an existing transaction
+      parameters:
+        - name: transactionId
+          in: path
+          description: ID of transaction to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+    delete:
+      tags:
+        - transaction
+      summary: Delete an existing transaction
+      parameters:
+        - name: transactionId
+          in: path
+          description: ID of transaction to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+components:
+  schemas:
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The transaction id.
+        value:
+          type: integer
+          description: The transaction value.
+        timestamp:
+          type: integer
+          description: The transaction timestamp.
+        receiver:
+          type: string
+          description: Who is receivering the transaction.
+        confirmed:
+          type: boolean
+          default: false
+          description: Whether the transaction has been confirmed.
+        sender:
+          type: string
+          description: Who is sending the transaction.
