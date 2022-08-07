@@ -13,7 +13,7 @@ $ docker-compose up
 ```
 
 #### Run
-Open url in browser `http://localhost:3000/``
+Open url in browser `http://localhost:3000/`
 
 #### Testing
 ```
@@ -23,6 +23,6 @@ $ go test
 
 
 #### Author
-Konrad Djimeli, konraddjimeli@gmail.com
+Konrad Djimeli
 
 
